@@ -15,6 +15,15 @@ return new class extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user');
+            $table->string('address');
+            $table->string('number');
+            $table->string('complement');
+            $table->string('zipcode');
+            $table->string('city');
+            $table->string('state');
+
+            $table->foreign('user')->references('id')->on('users')->cascadeOnDelete();
             $table->timestamps();
         });
     }

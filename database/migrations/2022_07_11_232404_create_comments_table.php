@@ -15,6 +15,12 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('post');
+            $table->unsignedBigInteger('user');
+            $table->text('content');
+
+            $table->foreign('post')->references('id')->on('posts')->cascadeOnDelete();
+            $table->foreign('user')->references('id')->on('users')->cascadeOnDelete();
             $table->timestamps();
         });
     }

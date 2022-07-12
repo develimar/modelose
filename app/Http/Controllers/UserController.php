@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -59,6 +60,63 @@ class UserController extends Controller
             echo "Cidade: {$enderecoUsuario->city}/{$enderecoUsuario->state}<br>";
         }
 
+//        $address = new Address([
+//            'address' => 'Joaquim Rodrigues',
+//            'number' => '36',
+//            'complement' => 'casa',
+//            'zipcode' => '35702359',
+//            'city' => 'Sete Lagoas',
+//            'state' => 'Minas Gerais'
+//        ]);
+
+//        $address = new Address();
+//        $address->address = 'Av Marechal Casteloaaa';
+//        $address->number = '3795';
+//        $address->complement = 'Empresasss';
+//        $address->zipcode = '35702134';
+//        $address->city = 'Sete Lagoasas';
+//        $address->state = 'MGfff';
+//
+//        $addressTest = new Address();
+//        $addressTest->address = 'Av Marechal Casteloddd';
+//        $addressTest->number = '379';
+//        $addressTest->complement = 'Empresa';
+//        $addressTest->zipcode = '35702134';
+//        $addressTest->city = 'Sete Lagoasasddf';
+//        $addressTest->state = 'MGeee';
+
+//        $user->enderecoEntrega()->saveMany([$address, $addressTest]);
+//        $user->enderecoEntrega()->saveMany([$address, $addressTest]);
+//        $user->enderecoEntrega()->create([
+//            'address' => 'Joaquim Rodrigues Almeida',
+//            'number' => '3636',
+//            'complement' => 'casass',
+//            'zipcode' => '35702359aa',
+//            'city' => 'Sete Lagoasdd',
+//            'state' => 'Minas Geraisaaddssssd'
+//        ]);
+
+//        $user->enderecoEntrega()->createMany([[
+//            'address' => 'Joaquim Rodrigues Almeida',
+//            'number' => '444',
+//            'complement' => 'casass',
+//            'zipcode' => '35702359aa',
+//            'city' => 'Sete Lagoasdd',
+//            'state' => 'Minas Geraisaaddssadsfadsfadsfssd'
+//        ],
+//            [
+//                'address' => 'Joaquim Rodrigues fdsadsfaafsdAlmeida',
+//                'number' => '3856',
+//                'complement' => '234',
+//                'zipcode' => '35702asdfadsf359aa',
+//                'city' => 'Sete asdfa',
+//                'state' => 'Minas Geraisaadsafdsafaddssssd'
+//            ]
+//        ]);
+
+
+        $users = User::with('enderecoEntrega')->get();
+        dd($users);
     }
 
     /**

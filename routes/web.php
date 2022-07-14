@@ -16,6 +16,8 @@ use App\Http\Controllers\UserController;
 
 Route::resource('users', UserController::class);
 Route::resource('address', \App\Http\Controllers\AddressController::class);
+Route::resource('posts', \App\Http\Controllers\PostController::class);
+Route::resource('categories', \App\Http\Controllers\CategoryController::class);
 
 Route::get('/', function () {
     return view('welcome');

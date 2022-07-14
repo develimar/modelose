@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Address;
 use App\Models\User;
 use Illuminate\Http\Request;
+use function PHPUnit\Framework\fileExists;
 
 class UserController extends Controller
 {
@@ -115,8 +116,71 @@ class UserController extends Controller
 //        ]);
 
 
-        $users = User::with('enderecoEntrega')->get();
-        dd($users);
+//        $users = User::with('enderecoEntrega')->get();
+//        dd($users);
+
+
+
+        $posts = $user->posts()->orderBy('id','desc')->get();
+        //dd($posts);
+        if ($posts){
+            echo "<h1>Artigos</h1><br>";
+            foreach ($posts as $post) {
+                echo "{#$post->id}Title: {$post->title}<br>";
+                echo "Subtitulo: {$post->subtitle}<br>";
+                echo "Descrição: {$post->description}<br><hr>";
+            }
+        }
+
+
+//        $comments = $user->commentsOnMyPost()->get();
+//        if ($comments){
+//            echo "<h1>Comentarios no meu artigo</h1><br>";
+//            foreach ($comments as $comment){
+//                echo "Post: {$comment->id} Usuario: {$comment->user}";
+//                echo "Comentario: {$comment->content}<br>";
+//            }
+//        }
+
+        //var_dump($comments);
+
+//        $user->comments()->create([
+//            'content' => 'Comentario 563'
+//        ]);
+
+        $comments = $user->comments()->get();
+        if ($comments){
+            echo "<h1>Comentarios</h1><br>";
+            foreach ($comments as $comment){
+                echo "Categoria: #{$comment->id} - {$comment->content}<br>";
+            }
+        }
+
+        $students = User::students()->get();
+        if ($students){
+            echo "<h1>Estudantes</h1><br>";
+            foreach ($students as $student){
+                echo "Nome do Usuario: {$student->name}<br>";
+                echo "Email: {$student->email}<br><hr>";
+            }
+        }
+
+        $admins = User::admins()->get();
+        if ($admins){
+            echo "<h1>Administradores</h1><br>";
+            foreach ($admins as $admin){
+                echo "Nome do Usuario: {$admin->name}<br>";
+                echo "Email: {$admin->email}<br><hr>";
+            }
+        }
+
+        $users = User::all();
+        var_dump($users->makeHidden(['created_at'])->toArray());
+        dd($users->makeVisible(['created_at'])->toJson(JSON_PRETTY_PRINT));
+
+
+
+
     }
 
     /**
